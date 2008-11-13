@@ -1,0 +1,62 @@
+HEADERS= collision2.h collision.h constraint.h containers.h dcd.h message.h perflinux.h rigidbody.h scenery.h simulator.h stack.h tokamak.h
+
+$(MIDDIR)boxcylinder.cpp.o : boxcylinder.cpp $(HEADERS)
+	$(OLO_CXX) -c boxcylinder.cpp $(CXXFLAGS) -r -o $(MIDDIR)boxcylinder.cpp.o
+
+$(MIDDIR)collisionbody.cpp.o : collisionbody.cpp $(HEADERS)
+	$(OLO_CXX) -c collisionbody.cpp $(CXXFLAGS) -r -o $(MIDDIR)collisionbody.cpp.o
+
+$(MIDDIR)collision.cpp.o : collision.cpp $(HEADERS)
+	$(OLO_CXX) -c collision.cpp $(CXXFLAGS) -r -o $(MIDDIR)collision.cpp.o
+
+$(MIDDIR)constraint.cpp.o : constraint.cpp $(HEADERS)
+	$(OLO_CXX) -c constraint.cpp $(CXXFLAGS) -r -o $(MIDDIR)constraint.cpp.o
+
+$(MIDDIR)cylinder.cpp.o : cylinder.cpp $(HEADERS)
+	$(OLO_CXX) -c cylinder.cpp $(CXXFLAGS) -r -o $(MIDDIR)cylinder.cpp.o
+
+$(MIDDIR)dcd.cpp.o : dcd.cpp $(HEADERS)
+	$(OLO_CXX) -c dcd.cpp $(CXXFLAGS) -r -o $(MIDDIR)dcd.cpp.o
+
+$(MIDDIR)lines.cpp.o : lines.cpp $(HEADERS)
+	$(OLO_CXX) -c lines.cpp $(CXXFLAGS) -r -o $(MIDDIR)lines.cpp.o
+
+$(MIDDIR)ne_interface.cpp.o : ne_interface.cpp $(HEADERS)
+	$(OLO_CXX) -c ne_interface.cpp $(CXXFLAGS) -r -o $(MIDDIR)ne_interface.cpp.o
+
+$(MIDDIR)perflinux.cpp.o : perflinux.cpp $(HEADERS)
+	$(OLO_CXX) -c perflinux.cpp $(CXXFLAGS) -r -o $(MIDDIR)perflinux.cpp.o
+
+$(MIDDIR)region.cpp.o : region.cpp $(HEADERS)
+	$(OLO_CXX) -c region.cpp $(CXXFLAGS) -r -o $(MIDDIR)region.cpp.o
+
+$(MIDDIR)restcontact.cpp.o : restcontact.cpp $(HEADERS)
+	$(OLO_CXX) -c restcontact.cpp $(CXXFLAGS) -r -o $(MIDDIR)restcontact.cpp.o
+
+$(MIDDIR)rigidbodybase.cpp.o : rigidbodybase.cpp $(HEADERS)
+	$(OLO_CXX) -c rigidbodybase.cpp $(CXXFLAGS) -r -o $(MIDDIR)rigidbodybase.cpp.o
+
+$(MIDDIR)rigidbody.cpp.o : rigidbody.cpp $(HEADERS)
+	$(OLO_CXX) -c rigidbody.cpp $(CXXFLAGS) -r -o $(MIDDIR)rigidbody.cpp.o
+
+$(MIDDIR)scenery.cpp.o : scenery.cpp $(HEADERS)
+	$(OLO_CXX) -c scenery.cpp $(CXXFLAGS) -r -o $(MIDDIR)scenery.cpp.o
+
+$(MIDDIR)simulator.cpp.o : simulator.cpp $(HEADERS)
+	$(OLO_CXX) -c simulator.cpp $(CXXFLAGS) -r -o $(MIDDIR)simulator.cpp.o
+
+$(MIDDIR)solver.cpp.o : solver.cpp $(HEADERS)
+	$(OLO_CXX) -c solver.cpp $(CXXFLAGS) -r -o $(MIDDIR)solver.cpp.o
+
+$(MIDDIR)sphere.cpp.o : sphere.cpp $(HEADERS)
+	$(OLO_CXX) -c sphere.cpp $(CXXFLAGS) -r -o $(MIDDIR)sphere.cpp.o
+
+$(MIDDIR)stack.cpp.o : stack.cpp $(HEADERS)
+	$(OLO_CXX) -c stack.cpp $(CXXFLAGS) -r -o $(MIDDIR)stack.cpp.o
+
+$(MIDDIR)tricollision.cpp.o : tricollision.cpp $(HEADERS)
+	$(OLO_CXX) -c tricollision.cpp $(CXXFLAGS) -r -o $(MIDDIR)tricollision.cpp.o
+
+$(MIDDIR)useopcode.cpp.o : useopcode.cpp $(HEADERS)
+	$(OLO_CXX) -c useopcode.cpp $(CXXFLAGS) -r -o $(MIDDIR)useopcode.cpp.o
+
