@@ -17,6 +17,7 @@ Sources := $(shell echo *.cpp)
 SYSTEM = Linux
 
 TARGET = ../lib/$(SYSTEM)/$(Target)
+TARGETDIR = ../lib/$(SYSTEM)/
 MIDDIR = ../mid/$(SYSTEM)/
 OBJECTS := $(foreach src, $(Sources), $(MIDDIR)$(src).o)
 
@@ -39,4 +40,5 @@ clean:
 	echo "Clean... "
 	-rm -f $(TARGET) $(OBJECTS)
 	mkdir -p $(MIDDIR)
+	mkdir -p $(TARGETDIR)
 	./makeup.sh
