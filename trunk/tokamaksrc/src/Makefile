@@ -12,7 +12,7 @@
 # *-----------------------------------------------------------------------------
 # */
 
-Target = tokamak.a
+Target = libtokamak.a
 Sources := $(shell echo *.cpp)
 SYSTEM = Linux
 
