@@ -62,7 +62,7 @@ namespace sklani
 		CRes *QueryRes(const core::stringc &strName);
 		void Clear();
 	protected:
-		typedef core::map<core::stringc,CRes *> MAP_NAME2RES;
+		typedef irr::core::map<core::stringc,CRes *> MAP_NAME2RES;
 		 MAP_NAME2RES m_mapRes;
 	};
 

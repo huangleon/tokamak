@@ -313,7 +313,8 @@ namespace sklani{
 		{
 			SJointInfo &info = m_vecJointInfo[i];
 			char szBuffer[128];
-			strcpy_s(szBuffer,128,m_vecJointInfo[i].strName.c_str());
+//			strcpy_s(szBuffer,128,m_vecJointInfo[i].strName.c_str());
+			strcpy(szBuffer,m_vecJointInfo[i].strName.c_str());
 			pWriteFile->write(szBuffer,128);
 			pWriteFile->write(&info.Trans,sizeof(info.Trans));
 			pWriteFile->write(&info.Rotate,sizeof(info.Rotate));
@@ -1089,7 +1090,8 @@ namespace sklani{
 			tmpBuffer.Material.EmissiveColor = video::SColorf(material.Emissive[0], material.Emissive[1], material.Emissive[2], material.Emissive[3]).toSColor ();
 			tmpBuffer.Material.SpecularColor = video::SColorf(material.Specular[0], material.Specular[1], material.Specular[2], material.Specular[3]).toSColor ();
 			tmpBuffer.Material.Shininess = material.Shininess;
-			strcpy_s((char *)tmpBuffer.Texture ,128, (const char *)material.Texture);
+//			strcpy_s((char *)tmpBuffer.Texture ,128, (const char *)material.Texture);
+			strcpy((char *)tmpBuffer.Texture ,(const char *)material.Texture);
 			m_pDriver->setTextureCreationFlag(ETCF_CREATE_MIP_MAPS, false);	
 			tmpBuffer.Material.Textures[0] =  m_pDriver->getTexture((const c8*)material.Texture);	
 			
