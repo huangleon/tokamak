@@ -1,0 +1,80 @@
+HEADERS= BallAction.h car.h CCameraMayaSceneNode.h CCameraSceneNode.h CMilkShape3DMesh.h include.h os.h PingPangMD2XMesh.h PingPangMeshLoader.h PingPangSAMMesh.h resource.h stdafx.h TennisBall.h TennisCalc.h TennisCfg.h TennisPhysics.h TennisRoom.h TennisTable.h TennisTrack.h TestManager.h
+
+$(MIDDIR)BallAction.cpp.o : BallAction.cpp $(HEADERS)
+	$(OLO_CXX) -c BallAction.cpp $(CXXFLAGS) -r -o $(MIDDIR)BallAction.cpp.o
+
+$(MIDDIR)CCameraMayaSceneNode.cpp.o : CCameraMayaSceneNode.cpp $(HEADERS)
+	$(OLO_CXX) -c CCameraMayaSceneNode.cpp $(CXXFLAGS) -r -o $(MIDDIR)CCameraMayaSceneNode.cpp.o
+
+$(MIDDIR)CCameraSceneNode.cpp.o : CCameraSceneNode.cpp $(HEADERS)
+	$(OLO_CXX) -c CCameraSceneNode.cpp $(CXXFLAGS) -r -o $(MIDDIR)CCameraSceneNode.cpp.o
+
+$(MIDDIR)CMilkShape3DMesh.cpp.o : CMilkShape3DMesh.cpp $(HEADERS)
+	$(OLO_CXX) -c CMilkShape3DMesh.cpp $(CXXFLAGS) -r -o $(MIDDIR)CMilkShape3DMesh.cpp.o
+
+$(MIDDIR)os.cpp.o : os.cpp $(HEADERS)
+	$(OLO_CXX) -c os.cpp $(CXXFLAGS) -r -o $(MIDDIR)os.cpp.o
+
+$(MIDDIR)PingPangMD2XMesh.cpp.o : PingPangMD2XMesh.cpp $(HEADERS)
+	$(OLO_CXX) -c PingPangMD2XMesh.cpp $(CXXFLAGS) -r -o $(MIDDIR)PingPangMD2XMesh.cpp.o
+
+$(MIDDIR)PingPangMeshLoader.cpp.o : PingPangMeshLoader.cpp $(HEADERS)
+	$(OLO_CXX) -c PingPangMeshLoader.cpp $(CXXFLAGS) -r -o $(MIDDIR)PingPangMeshLoader.cpp.o
+
+$(MIDDIR)PingPangSAMMesh.cpp.o : PingPangSAMMesh.cpp $(HEADERS)
+	$(OLO_CXX) -c PingPangSAMMesh.cpp $(CXXFLAGS) -r -o $(MIDDIR)PingPangSAMMesh.cpp.o
+
+$(MIDDIR)stdafx.cpp.o : stdafx.cpp $(HEADERS)
+	$(OLO_CXX) -c stdafx.cpp $(CXXFLAGS) -r -o $(MIDDIR)stdafx.cpp.o
+
+$(MIDDIR)TennisBall.cpp.o : TennisBall.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisBall.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisBall.cpp.o
+
+$(MIDDIR)TennisCalc.cpp.o : TennisCalc.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisCalc.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisCalc.cpp.o
+
+$(MIDDIR)TennisCfg.cpp.o : TennisCfg.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisCfg.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisCfg.cpp.o
+
+$(MIDDIR)TennisPhysics.cpp.o : TennisPhysics.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisPhysics.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisPhysics.cpp.o
+
+$(MIDDIR)TennisRoom.cpp.o : TennisRoom.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisRoom.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisRoom.cpp.o
+
+$(MIDDIR)TennisTable.cpp.o : TennisTable.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisTable.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisTable.cpp.o
+
+$(MIDDIR)TennisTrack.cpp.o : TennisTrack.cpp $(HEADERS)
+	$(OLO_CXX) -c TennisTrack.cpp $(CXXFLAGS) -r -o $(MIDDIR)TennisTrack.cpp.o
+
+$(MIDDIR)TestManager.cpp.o : TestManager.cpp $(HEADERS)
+	$(OLO_CXX) -c TestManager.cpp $(CXXFLAGS) -r -o $(MIDDIR)TestManager.cpp.o
+
+$(MIDDIR)TestScene.cpp.o : TestScene.cpp $(HEADERS)
+	$(OLO_CXX) -c TestScene.cpp $(CXXFLAGS) -r -o $(MIDDIR)TestScene.cpp.o
+
+$(MIDDIR)common/MP3Player.cpp.o : common/MP3Player.cpp $(HEADERS)
+	$(OLO_CXX) -c common/MP3Player.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/MP3Player.cpp.o
+
+$(MIDDIR)common/utility/CameraTracing.cpp.o : common/utility/CameraTracing.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/CameraTracing.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/CameraTracing.cpp.o
+
+$(MIDDIR)common/utility/cfg_parser.cpp.o : common/utility/cfg_parser.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/cfg_parser.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/cfg_parser.cpp.o
+
+$(MIDDIR)common/utility/Game2DDC.cpp.o : common/utility/Game2DDC.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/Game2DDC.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/Game2DDC.cpp.o
+
+$(MIDDIR)common/utility/GameCfg.cpp.o : common/utility/GameCfg.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/GameCfg.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/GameCfg.cpp.o
+
+$(MIDDIR)common/utility/GameLog.cpp.o : common/utility/GameLog.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/GameLog.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/GameLog.cpp.o
+
+$(MIDDIR)common/utility/QuadraticCurve.cpp.o : common/utility/QuadraticCurve.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/QuadraticCurve.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/QuadraticCurve.cpp.o
+
+$(MIDDIR)common/utility/TokaPhysics.cpp.o : common/utility/TokaPhysics.cpp $(HEADERS)
+	$(OLO_CXX) -c common/utility/TokaPhysics.cpp $(CXXFLAGS) -r -o $(MIDDIR)common/utility/TokaPhysics.cpp.o
+

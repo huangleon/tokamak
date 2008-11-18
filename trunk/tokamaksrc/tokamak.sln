@@ -1,7 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tokamak", "tokamak.vcproj", "{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TokaDemo", "TokaDemo\TokaDemo.vcproj", "{16234880-87EC-476B-9F22-04C926D47243}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8} = {4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tokamak", "src\tokamak.vcproj", "{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +16,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16234880-87EC-476B-9F22-04C926D47243}.Debug Multithreaded|Win32.ActiveCfg = Debug|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Debug Multithreaded|Win32.Build.0 = Debug|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Debug|Win32.ActiveCfg = Debug|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Debug|Win32.Build.0 = Debug|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Release Multithreaded|Win32.ActiveCfg = Release|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Release Multithreaded|Win32.Build.0 = Release|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Release|Win32.ActiveCfg = Release|Win32
+		{16234880-87EC-476B-9F22-04C926D47243}.Release|Win32.Build.0 = Release|Win32
 		{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}.Debug Multithreaded|Win32.ActiveCfg = Debug Multithreaded|Win32
 		{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}.Debug Multithreaded|Win32.Build.0 = Debug Multithreaded|Win32
 		{4028E54D-5779-4FB5-B1BD-8EC3BB92EDA8}.Debug|Win32.ActiveCfg = Debug|Win32
