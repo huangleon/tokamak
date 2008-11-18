@@ -13,7 +13,7 @@
 # *-----------------------------------------------------------------------------
 # */
 
-Target = testscene
+Target = TokaDemo
 Sources := $(shell echo *.cpp common/utility/*.cpp)
 SYSTEM = Linux
 
