@@ -26,13 +26,13 @@ PDKROOT=/root/Intel_CE_2110-1.5.257
 GSTREAMER_DIR=$(PDKROOT)/arm_gst
 LIB_DIR=$(PDKROOT)/arm-linux-elf/lib
 
-olo: CPPFLAGS = -I. -I../../irrlicht/include -I../../common -I../../tokamak/trunk/tokamaksrc/include 
+olo: CPPFLAGS = -I. -I../../../../irrlicht/include -I./common -I../include 
 #-I../../../include/network/zthread
 olo: CPPFLAGS += -O3 -ffast-math
 #olo: CPPFLAGS += -g
 olo: CXXFLAGS = $(CPPFLAGS)
 olo: SYSTEM = Linux
-olo: LDFLAGS = -L../../lib/$(SYSTEM) -ldl -L$(LIB_DIR) -L../../tokamak/trunk/tokamaksrc/lib/$(SYSTEM)/ -ltokamak
+olo: LDFLAGS = -L../../../../lib/$(SYSTEM) -ldl -L$(LIB_DIR) -L../lib/$(SYSTEM)/ -ltokamak
 olo: OLO_CXX = arm-linux-g++
 olo: OLO_AR = arm-linux-ar
 olo: OLO_LD = arm-linux-ld
