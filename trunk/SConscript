@@ -1,0 +1,71 @@
+# -*- coding: utf-8 -*-
+# Author: KanKer
+
+# Spec file for build tokamak and TokaDemo.
+
+import os
+import specs
+
+Import('env')
+
+tk_env = env.Clone()
+
+pkgname = 'tokamak'
+demoname = 'TokaDemo'
+
+if tk_env['USE_BUILDDIR']:
+    tk_dir = os.getcwd().replace(os.sep + tk_env['build_dir'],'')
+else:
+    tk_dir = os.getcwd()
+
+install_dir = os.path.join('#lib',tk_env['board'])
+include_dir = os.path.join('#include',pkgname)
+
+src_dir = 'tokamaksrc'
+
+tk_lib_srcs = Glob(os.path.join(src_dir,'src','*.cpp')) 
+cpppath=[os.path.join(src_dir,'include'),os.path.join(src_dir,'src')]
+
+if tk_env['board'] == 'win32':
+    tk_lib_srcs = tk_lib_srcs + Glob(os.path.join(src_dir,'src','win32','*.cpp'))
+    cpppath.append(os.path.join(src_dir,'src','win32'))
+
+tk_env.Prepend(CPPPATH=cpppath)
+
+objs=[]
+for src in tk_lib_srcs:
+    obj = tk_env.Object(src)
+    objs.append(obj)
+
+tk_lib=tk_env.Library(pkgname, objs)
+
+ins_acts = []
+tk_lib_incs = Glob(os.path.join(src_dir,'include','*.h'))
+tk_lib_math_incs = Glob(os.path.join(src_dir,'include','math','*.h'))
+ins_tk_lib_incs = tk_env.Install(include_dir,tk_lib_incs)
+ins_tk_lib_math_incs = tk_env.Install(os.path.join(include_dir,'math'),tk_lib_math_incs)
+Depends(ins_tk_lib_math_incs,ins_tk_lib_incs)
+
+ins_tk_lib = tk_env.Install(install_dir, tk_lib)
+Depends(ins_tk_lib, ins_tk_lib_math_incs)
+
+env.AppendUnique(CPPPATH=[include_dir])
+env['deps'].append(ins_tk_lib)
+
+demo_srcs = Glob(os.path.join(src_dir,'TokaDemo','*.cpp'))
+tk_env['CPPPATH'].append(os.path.join(src_dir,'TokaDemo'))
+
+libs = ['Irrlicht']
+libs.extend (tk_env['IRRLICHT_LIBS'])
+libs.extend (['common','tokamak'])
+tk_env.Prepend (LIBS = libs)
+tk_env.Append (LIBS = tk_env['PLATFORM_LIBS'])
+
+objs = []
+for src in demo_srcs:
+  obj=tk_env.Object(src)
+  objs.append(obj)
+
+demo = tk_env.Program(demoname, objs)
+
+
