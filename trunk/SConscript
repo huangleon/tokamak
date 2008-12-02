@@ -6,7 +6,7 @@
 import os
 import specs
 
-Import('env')
+Import('env','gameenv')
 
 tk_env = env.Clone()
 
@@ -55,23 +55,21 @@ Depends(ins_tk_lib_math_incs,ins_tk_lib_incs)
 ins_tk_lib = tk_env.Install(install_dir, tk_lib)
 Depends(ins_tk_lib, ins_tk_lib_math_incs)
 
-env.AppendUnique(CPPPATH=[include_dir])
-env['deps'].append(ins_tk_lib)
+gameenv.AppendUnique(CPPPATH=[include_dir])
+gameenv['PKGS']['tokamak'] = ins_tk_lib
 
+demo_env = gameenv.Clone()
 demo_srcs = Glob(os.path.join(src_dir,'TokaDemo','*.cpp'))
-tk_env['CPPPATH'].append(os.path.join(src_dir,'TokaDemo'))
+demo_env['CPPPATH'].append(os.path.join(src_dir,'TokaDemo'))
 
-libs = ['Irrlicht']
-libs.extend (tk_env['IRRLICHT_LIBS'])
-libs.extend (['common','tokamak'])
-tk_env.Prepend (LIBS = libs)
-tk_env.Append (LIBS = tk_env['PLATFORM_LIBS'])
+demo_env.AppendUnique (LIBS = ['tokamak'])
 
 objs = []
 for src in demo_srcs:
-  obj=tk_env.Object(src)
+  obj=demo_env.Object(src)
   objs.append(obj)
 
-demo = tk_env.Program(demoname, objs)
+demo = demo_env.Program(demoname, objs)
+Depends(demo,ins_tk_lib)
 
 
