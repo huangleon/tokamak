@@ -6,11 +6,11 @@
 #include "TestManager.h"
 #include "TennisRoom.h"
 #include "TennisTable.h"
-//#include "TennisPhysics.h"
-//#include "TennisBall.h"
 #include "PingPangMeshLoader.h"
 #include "utility/TokaPhysics.h"
 #include "utility/GameLog.h"
+#include "RemoteController/RemoterFactory.h"
+#include "RemoteMap/RMManager.h"
 #include "TennisCfg.h"
 
 #define Xoff (-200.0f)
@@ -37,6 +37,10 @@ using GameUtility::physics::E_CUBE_BODY;
 using GameUtility::physics::E_SPHERE_BODY;
 using GameUtility::physics::TokaPhyInitParam;
 
+using TM::E_SMB_REMOTE;
+using TM::RemoteMap::CRemoteMapManager;
+using TM::CRemoterFactory;
+
 CTennisTable* g_TennisTable;
 CTennisRoom* g_TennisRoom;
 
@@ -44,6 +48,9 @@ int main(int argc, char* argv[])
 {
 	CTennisCfgVars tennisCfg;
 	LoadCfgFile( CFG_FILE_PATH, &tennisCfg );
+
+	CRemoterFactory m_remoteManager;
+	CRemoteMapManager m_remoteMapper;
 
 	//CSampleCar sc;
 	//
@@ -143,6 +150,8 @@ int main(int argc, char* argv[])
 		, vector3df(-100.0f, 150.f, -600.f)
 		, vector3df(100.f, 250.f, -600.f)
 		, vector3df(.0f, 350.f, -500.f)
+		, vector3df(100.0f, 350.f, -500.f)
+		, vector3df(-100.0f, 350.f, -500.f)
 	};
 	vector3df tmppos;
 	for ( int i = 0; i < CTokaPhysics::CUBECOUNT; i++)
@@ -153,7 +162,7 @@ int main(int argc, char* argv[])
 		CubeNode[i] = smgr->addSphereSceneNode ( 50 / 2.f );
 		CubeNode[i]->setMaterialFlag( irr::video::EMF_LIGHTING, false );
 		//		CubeNode[i]->setMaterialTexture(0, driver->getTexture("../../media/t351sml.jpg"));
-		CubeNode[i]->setMaterialTexture(0, driver->getTexture("../../media-tokamak/stones.jpg"));
+		CubeNode[i]->setMaterialTexture(0, driver->getTexture("../../media-tokamak/earth.bmp"));
 		CubeNode[i]->getMaterial(0).MaterialType = irr::video::EMT_SOLID;
 		tmppos = pos[0];
 		tmppos.Y += i * 50.f;
@@ -173,6 +182,19 @@ int main(int argc, char* argv[])
 		CTokaPhysics::Instance()->attachNode( CubeNode[i], bdparam );
 	}
 
+	// Remote
+	m_remoteManager.addRemoteFilter( "00:12:6f" );
+	// 50 Hz
+	m_remoteManager.presetRemoteFreq(0);
+	m_remoteManager.presetRemoteSensorRange(0);
+
+	m_remoteManager.attachRemoteEventReceiver( &m_remoteMapper );
+	m_remoteManager.attachRemoteEEventReceiver( &m_remoteMapper );
+
+	if ( m_remoteManager.CreateRemoteControllers(E_SMB_REMOTE) )
+	{
+		m_remoteMapper.createAnalyzers( m_remoteManager.availableRemoteCount( E_SMB_REMOTE ) );
+	}
 	/*
 	We have done everything, so lets draw it. We also write the current
 	frames per second and the name of the driver to the caption of the
@@ -189,6 +211,38 @@ int main(int argc, char* argv[])
 		GUI Environment draw their content. With the endScene() call
 		everything is presented on the screen.
 		*/
+
+		m_remoteManager.ProcessRemoteInput();
+		TM::RemoteMap::AnalyzeResult ar;
+		m_remoteMapper.getAnalyzeResult( 0, ar );
+
+		if ( ar.angleY < -45.f )
+		{
+			std::cout << ar.angleY << std::endl;
+			CTokaPhysics::Instance()->pushBody( 0 );
+		}
+		else if ( ar.angleY > 45.f )
+		{
+			std::cout << ar.angleY << std::endl;
+			CTokaPhysics::Instance()->pushBody( 1 );
+		}
+		else
+		{
+//			CTokaPhysics::Instance()->pushBody( -1 );
+		}
+
+		if ( ar.angleX < -45.f )
+		{
+			CTokaPhysics::Instance()->pushBody( 3 );
+		}
+		else if ( ar.angleX > 45.f )
+		{
+			CTokaPhysics::Instance()->pushBody( 2 );
+		}
+		else
+		{
+//			CTokaPhysics::Instance()->pushBody( -1 );
+		}
 
 		CTokaPhysics::Instance()->stepForward( device->getTimer()->getTime() );
 
