@@ -216,28 +216,28 @@ int main(int argc, char* argv[])
 		TM::RemoteMap::AnalyzeResult ar;
 		m_remoteMapper.getAnalyzeResult( 0, ar );
 
-		if ( ar.angleY < -45.f )
+		if ( ar.angleY < 0 )
 		{
 			std::cout << ar.angleY << std::endl;
-			CTokaPhysics::Instance()->pushBody( 0 );
+			CTokaPhysics::Instance()->pushBody( 0, fabs(ar.angleY) / 100.f );
 		}
-		else if ( ar.angleY > 45.f )
+		else if ( ar.angleY > 0 )
 		{
 			std::cout << ar.angleY << std::endl;
-			CTokaPhysics::Instance()->pushBody( 1 );
+			CTokaPhysics::Instance()->pushBody( 1, fabs(ar.angleY) / 100.f );
 		}
 		else
 		{
 //			CTokaPhysics::Instance()->pushBody( -1 );
 		}
 
-		if ( ar.angleX < -45.f )
+		if ( ar.angleX < 0 )
 		{
-			CTokaPhysics::Instance()->pushBody( 3 );
+			CTokaPhysics::Instance()->pushBody( 3, fabs(ar.angleX) / 100.f );
 		}
-		else if ( ar.angleX > 45.f )
+		else if ( ar.angleX > 0 )
 		{
-			CTokaPhysics::Instance()->pushBody( 2 );
+			CTokaPhysics::Instance()->pushBody( 2, fabs(ar.angleX) / 100.f );
 		}
 		else
 		{

@@ -130,14 +130,14 @@ bool CTestManager::OnEvent(SEvent event)
 			CTokaPhysics::Instance()->rotateAnimateBody( true, rotroom );
 #else
 			// Test code of push 
-			CTokaPhysics::Instance()->pushBody(2);
+			CTokaPhysics::Instance()->pushBody(2, 1.f);
 #endif
 
 			bkeyLeft = true;
 		}
 		if ( event.KeyInput.Key == KEY_LEFT && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1);
+			CTokaPhysics::Instance()->pushBody(-1, 1.f);
 			bkeyLeft = false;
 		}
 
