@@ -26,12 +26,12 @@ src_dir = 'tokamaksrc'
 cpppath=[os.path.join(src_dir,'include'),os.path.join(src_dir,'src')]
 
 srcs = Glob(os.path.join(src_dir,'src','*.cpp'))
-if tk_env['board'] == 'win32':
+if tk_env['TARGETOS'] == 'WIN32':
+    tk_lib_srcs = []
     for src in srcs:
-        if str(src) == os.path.join(src_dir,'src','perflinux.cpp'):
-            srcs.remove(src)
-
-    tk_lib_srcs = srcs + Glob(os.path.join(src_dir,'src','win32','*.cpp'))
+        if not 'linux' in src.name:
+            tk_lib_srcs += [ src ]
+    tk_lib_srcs += Glob(os.path.join(src_dir,'src','win32','*.cpp'))
     cpppath.append(os.path.join(src_dir,'src','win32'))
 else:
     tk_lib_srcs = srcs
