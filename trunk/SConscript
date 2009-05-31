@@ -57,6 +57,8 @@ Depends(ins_tk_lib, ins_tk_lib_math_incs)
 
 specs.SetupLibEnv([gameenv,env], 'tokamak', deps = ins_tk_lib, LIBS = [pkgname], CPPPATH = [include_dir])
 
+Return()
+#not compile at this stage
 demo_env = tk_env.Clone()
 demo_srcs = Glob(os.path.join(src_dir,'TokaDemo','*.cpp'))
 demo_env.PrependUnique(CPPPATH = [os.path.join(src_dir,'TokaDemo')])
