@@ -55,7 +55,9 @@ Depends(ins_tk_lib_math_incs,ins_tk_lib_incs)
 ins_tk_lib = tk_env.Install(install_dir, tk_lib)
 Depends(ins_tk_lib, ins_tk_lib_math_incs)
 
-specs.SetupLibEnv([gameenv,env], 'tokamak', deps = ins_tk_lib, LIBS = [pkgname], CPPPATH = [include_dir])
+specs.SetupLibEnv([gameenv,env], 'tokamak', deps = tk_lib, LIBS = [pkgname],
+                  CPPPATH = [os.path.join(tk_env.Dir('.').abspath, src_dir, 'include')],
+                  LIBPATH = [tk_env.Dir('.').abspath])
 
 Return()
 #not compile at this stage
