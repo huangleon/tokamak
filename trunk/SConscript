@@ -13,10 +13,7 @@ tk_env = env.Clone()
 pkgname = 'tokamak'
 demoname = 'TokaDemo'
 
-if tk_env['USE_BUILDDIR']:
-    tk_dir = os.getcwd().replace(os.sep + tk_env['build_dir'],'')
-else:
-    tk_dir = os.getcwd()
+tk_dir = tk_env.Dir('.').srcnode().abspath
 
 install_dir = os.path.join('#lib',tk_env['board'])
 include_dir = os.path.join('#include',pkgname)
@@ -43,7 +40,11 @@ for src in tk_lib_srcs:
     obj = tk_env.Object(src)
     objs.append(obj)
 
+Depends(objs, tk_env['builddeps'])
+
 tk_lib=tk_env.Library(pkgname, objs)
+
+Depends(tk_lib, tk_env['linkdeps'])
 
 ins_acts = []
 tk_lib_incs = Glob(os.path.join(src_dir,'include','*.h'))
@@ -55,8 +56,8 @@ Depends(ins_tk_lib_math_incs,ins_tk_lib_incs)
 ins_tk_lib = tk_env.Install(install_dir, tk_lib)
 Depends(ins_tk_lib, ins_tk_lib_math_incs)
 
-specs.SetupLibEnv([gameenv,env], 'tokamak', deps = tk_lib, LIBS = [pkgname],
-                  CPPPATH = [os.path.join(tk_env.Dir('.').abspath, src_dir, 'include')],
+specs.SetupLibEnv([gameenv,env], 'tokamak', linkdeps = tk_lib, LIBS = [pkgname],
+                  CPPPATH = [os.path.join(tk_dir, src_dir, 'include')],
                   LIBPATH = [tk_env.Dir('.').abspath])
 
 Return()
@@ -68,14 +69,16 @@ demo_env.PrependUnique(CPPPATH = [os.path.join(src_dir,'TokaDemo')])
 specs.UseIrrlicht(demo_env)
 specs.UseCommon(demo_env)
 
-demo_env.AppendUnique (LIBS = ['tokamak'])
+demo_env.AppendUnique (LIBS = ['tokamak'], LIBPATH = ['.'])
 
 objs = []
 for src in demo_srcs:
   obj=demo_env.Object(src)
   objs.append(obj)
 
+Depends(objs, demo_env['builddeps'])
+
 demo = demo_env.Program(demoname, objs)
-Depends(demo,ins_tk_lib)
+Depends(demo,demo_env['linkdeps'])
 
 
