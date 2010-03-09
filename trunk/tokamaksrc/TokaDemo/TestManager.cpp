@@ -22,7 +22,7 @@ using irr::KEY_UP;
 using irr::KEY_DOWN;
 using irr::KEY_LEFT;
 using irr::KEY_RIGHT;
-using GameUtility::physics::CTokaPhysics;
+using TM::Physics::CTokaPhysics;
 
 const f32 fspeed[] = {0.001f, 0.01f, 0.05f, 0.1f, 0.3f, 0.7f, 1.0f, 1.5f, 2.0f, 3.0f};
 const int SPDSIZE = 10;
@@ -127,17 +127,17 @@ bool CTestManager::OnEvent(SEvent event)
 					g_TennisTable->getTableNetNode(i)->setPosition( pos );
 				}
 			}
-			CTokaPhysics::Instance()->rotateAnimateBody( true, rotroom );
+			CTokaPhysics::getInstance()->rotateAnimateBody( true, rotroom );
 #else
 			// Test code of push 
-			CTokaPhysics::Instance()->pushBody(2, 1.f);
+			CTokaPhysics::getInstance()->pushBody(2, 1.f);
 #endif
 
 			bkeyLeft = true;
 		}
 		if ( event.KeyInput.Key == KEY_LEFT && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1, 1.f);
+			CTokaPhysics::getInstance()->pushBody(-1, 1.f);
 			bkeyLeft = false;
 		}
 
@@ -164,51 +164,51 @@ bool CTestManager::OnEvent(SEvent event)
 					g_TennisTable->getTableNetNode(i)->setPosition( pos );
 				}
 			}
-			CTokaPhysics::Instance()->rotateAnimateBody( false, rotroom );
+			CTokaPhysics::getInstance()->rotateAnimateBody( false, rotroom );
 #else
 			// Test code of push
-			CTokaPhysics::Instance()->pushBody(3);
+			CTokaPhysics::getInstance()->pushBody(3);
 #endif
 			bkeyRight = true;
 		}
 		if ( event.KeyInput.Key == KEY_RIGHT && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1);
+			CTokaPhysics::getInstance()->pushBody(-1);
 			bkeyRight = false;
 		}
 		// up key
 		if ( !bkeyUp && event.KeyInput.Key == KEY_UP && event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(0);
+			CTokaPhysics::getInstance()->pushBody(0);
 			bkeyUp = true;
 		}
 		if ( event.KeyInput.Key == KEY_UP && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1);
+			CTokaPhysics::getInstance()->pushBody(-1);
 			bkeyUp = false;
 		}
 
 		// down key
 		if ( !bkeyDown && event.KeyInput.Key == KEY_DOWN && event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(1);
+			CTokaPhysics::getInstance()->pushBody(1);
 			bkeyDown = true;
 		}
 		if ( event.KeyInput.Key == KEY_DOWN && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1);
+			CTokaPhysics::getInstance()->pushBody(-1);
 			bkeyDown = false;
 		}
 
 		// A key
 		if ( !bkeyA && event.KeyInput.Key == KEY_KEY_A && event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(4);
+			CTokaPhysics::getInstance()->pushBody(4);
 			bkeyA = true;
 		}
 		if ( event.KeyInput.Key == KEY_KEY_A && !event.KeyInput.PressedDown )
 		{
-			CTokaPhysics::Instance()->pushBody(-1);
+			CTokaPhysics::getInstance()->pushBody(-1);
 			bkeyA = false;
 		}
 

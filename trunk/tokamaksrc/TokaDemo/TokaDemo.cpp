@@ -31,11 +31,11 @@ using irr::core::PI;
 using irr::video::SColor;
 using irr::core::stringw;
 
-using GameUtility::physics::CTokaPhysics;
-using GameUtility::physics::TokaBodyParam;
-using GameUtility::physics::E_CUBE_BODY;
-using GameUtility::physics::E_SPHERE_BODY;
-using GameUtility::physics::TokaPhyInitParam;
+using TM::Physics::CTokaPhysics;
+using TM::Physics::TokaBodyParam;
+using TM::Physics::E_CUBE_BODY;
+using TM::Physics::E_SPHERE_BODY;
+using TM::Physics::TokaPhyInitParam;
 
 using TM::E_SMB_REMOTE;
 using TM::RemoteMap::CRemoteMapManager;
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 	LoadCfgFile( CFG_FILE_PATH, &tennisCfg );
 
 	CRemoterFactory m_remoteManager;
-	CRemoteMapManager m_remoteMapper;
+	CRemoteMapManager m_remoteMapper(E_SMB_REMOTE);
 
 	//CSampleCar sc;
 	//
@@ -60,7 +60,8 @@ int main(int argc, char* argv[])
 	ENABLE_LOG(2);
 
 	IrrlichtDevice *device =
-		createDevice( EDT_DIRECT3D9, dimension2d<s32>(1280, 720), 16,
+		createDevice( EDT_DIRECT3D9, dimension2d<s32>(1280, 720),
+			dimension2d<s32>(1280, 720),16,
 			false, false, false, 0);
 
 	device->setWindowCaption(L"Test Scene");
@@ -143,7 +144,7 @@ int main(int argc, char* argv[])
 	TokaPhyInitParam initParam;
 	initParam.rbCount = CTokaPhysics::CUBECOUNT;
 	initParam.gravity = vector3df(0, -9.8f, 0);
-	CTokaPhysics::Instance()->InitTokaPhysics( initParam );
+	CTokaPhysics::getInstance()->InitTokaPhysics( initParam );
 	irr::scene::ISceneNode *CubeNode[CTokaPhysics::CUBECOUNT];
 
 	vector3df pos[] = { vector3df(-100.0f, 50.f, -600.f)
@@ -179,7 +180,7 @@ int main(int argc, char* argv[])
 		bdparam.body_x = 50.0f;
 		bdparam.body_y = 50.0f;
 		bdparam.body_z = 50.0f;
-		CTokaPhysics::Instance()->attachNode( CubeNode[i], bdparam );
+		CTokaPhysics::getInstance()->attachNode( CubeNode[i], bdparam );
 	}
 
 	// Remote
@@ -191,9 +192,9 @@ int main(int argc, char* argv[])
 	m_remoteManager.attachRemoteEventReceiver( &m_remoteMapper );
 	m_remoteManager.attachRemoteEEventReceiver( &m_remoteMapper );
 
-	if ( m_remoteManager.CreateRemoteControllers(E_SMB_REMOTE) )
+	if ( m_remoteManager.CreateRemoteControllers() )
 	{
-		m_remoteMapper.createAnalyzers( m_remoteManager.availableRemoteCount( E_SMB_REMOTE ) );
+		m_remoteMapper.createAnalyzers( m_remoteManager.availableRemoteCount() );
 	}
 	/*
 	We have done everything, so lets draw it. We also write the current
@@ -219,32 +220,32 @@ int main(int argc, char* argv[])
 		if ( ar.angleY < 0 )
 		{
 			std::cout << ar.angleY << std::endl;
-			CTokaPhysics::Instance()->pushBody( 0, fabs(ar.angleY) / 100.f );
+			CTokaPhysics::getInstance()->pushBody( 0, fabs(ar.angleY) / 100.f );
 		}
 		else if ( ar.angleY > 0 )
 		{
 			std::cout << ar.angleY << std::endl;
-			CTokaPhysics::Instance()->pushBody( 1, fabs(ar.angleY) / 100.f );
+			CTokaPhysics::getInstance()->pushBody( 1, fabs(ar.angleY) / 100.f );
 		}
 		else
 		{
-//			CTokaPhysics::Instance()->pushBody( -1 );
+//			CTokaPhysics::getInstance()->pushBody( -1 );
 		}
 
 		if ( ar.angleX < 0 )
 		{
-			CTokaPhysics::Instance()->pushBody( 3, fabs(ar.angleX) / 100.f );
+			CTokaPhysics::getInstance()->pushBody( 3, fabs(ar.angleX) / 100.f );
 		}
 		else if ( ar.angleX > 0 )
 		{
-			CTokaPhysics::Instance()->pushBody( 2, fabs(ar.angleX) / 100.f );
+			CTokaPhysics::getInstance()->pushBody( 2, fabs(ar.angleX) / 100.f );
 		}
 		else
 		{
-//			CTokaPhysics::Instance()->pushBody( -1 );
+//			CTokaPhysics::getInstance()->pushBody( -1 );
 		}
 
-		CTokaPhysics::Instance()->stepForward( device->getTimer()->getTime() );
+		CTokaPhysics::getInstance()->stepForward( device->getTimer()->getTime() );
 
 		driver->beginScene(true, true, SColor(255,100,101,140));
 
@@ -267,8 +268,8 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	CTokaPhysics::Instance()->ReleaseTokaPhysics();
-	CTokaPhysics::Instance()->Release();
+	CTokaPhysics::getInstance()->ReleaseTokaPhysics();
+	CTokaPhysics::getInstance()->releaseInstance();
 	
 	device->drop();
 	UnloadCfgFile();
