@@ -1115,4 +1115,5 @@ neV3 TOKAMAK_API neSphereInertiaTensor(f32 diameter, f32 mass);
 neV3 TOKAMAK_API neCylinderInertiaTensor(f32 diameter, f32 height, f32 mass);
 
 }
+using namespace Tokamak;
 #endif//TOKAMAK_H

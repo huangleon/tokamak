@@ -57,6 +57,20 @@ typedef u8                  neByte;
 typedef s32                 neErr;
 typedef s32                 neBool;
 
+#ifndef isfinite
+# ifdef __NO_LONG_DOUBLE_MATH
+#  define isfinite(x) \
+     (sizeof (x) == sizeof (float) ? __finitef (x) : __finite (x))
+# else
+#  define isfinite(x) \
+     (sizeof (x) == sizeof (float)                                            \
+      ? __finitef (x)                                                         \
+      : sizeof (x) == sizeof (double)                                         \
+      ? __finite (x) : __finitel (x))
+# endif
+#endif
+
+
 #if _MSC_VER
 	typedef signed   __int64    s64;
 	typedef unsigned __int64    u64;
