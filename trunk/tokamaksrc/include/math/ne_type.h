@@ -16,6 +16,8 @@
 
 
 #include <stdarg.h>
+#include <stddef.h>
+
 //#include <tchar.h>
 //#include <strsafe.h>
 ///////////////////////////////////////////////////////////////////////////
@@ -58,7 +60,7 @@ typedef s32                 neErr;
 typedef s32                 neBool;
 
 #ifndef isfinite
-# ifdef __NO_LONG_DOUBLE_MATH
+# if defined(__NO_LONG_DOUBLE_MATH) || (defined(__UCLIBC__) && !defined(__UCLIBC_HAS_LONG_DOUBLE_MATH__ ))
 #  define isfinite(x) \
      (sizeof (x) == sizeof (float) ? __finitef (x) : __finite (x))
 # else
@@ -69,7 +71,6 @@ typedef s32                 neBool;
       ? __finite (x) : __finitel (x))
 # endif
 #endif
-
 
 #if _MSC_VER
 	typedef signed   __int64    s64;
