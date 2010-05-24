@@ -60,6 +60,13 @@ specs.SetupLibEnv([gameenv,env], 'tokamak', linkdeps = tk_lib, LIBS = [pkgname],
                   CPPPATH = [os.path.join(tk_dir, src_dir, 'include')],
                   LIBPATH = [tk_env.Dir('.').abspath])
 
+
+tk_env.Alias('deps_install', ins_tk_lib)
+
+# install libs for vc
+vc_libs = specs.InstallLibForVc(tk_env, ins_tk_lib)
+tk_env.Alias('deps_install', vc_libs)
+
 Return()
 #not compile at this stage
 demo_env = tk_env.Clone()
