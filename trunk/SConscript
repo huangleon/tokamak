@@ -17,6 +17,7 @@ tk_dir = tk_env.Dir('.').srcnode().abspath
 
 install_dir = os.path.join('#lib',tk_env['board'])
 include_dir = os.path.join('#include',pkgname)
+static = 'ogre' in tk_env['BUILD_STATIC']
 
 src_dir = 'tokamaksrc'
 
@@ -37,7 +38,10 @@ tk_env.Prepend(CPPPATH=cpppath)
 
 objs=[]
 for src in tk_lib_srcs:
-    obj = tk_env.Object(src)
+    if static:
+        obj = tk_env.Object(src)
+    else:
+        obj = tk_env.SharedObject(src)
     objs.append(obj)
 
 Depends(objs, tk_env['builddeps'])
