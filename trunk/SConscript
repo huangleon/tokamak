@@ -17,7 +17,6 @@ tk_dir = tk_env.Dir('.').srcnode().abspath
 
 install_dir = os.path.join('#lib',tk_env['board'])
 include_dir = os.path.join('#include',pkgname)
-static = 'ogre' in tk_env['BUILD_STATIC']
 
 src_dir = 'tokamaksrc'
 
@@ -38,16 +37,12 @@ tk_env.Prepend(CPPPATH=cpppath)
 
 objs=[]
 for src in tk_lib_srcs:
-    if static:
-        obj = tk_env.Object(src)
-    else:
-        obj = tk_env.SharedObject(src)
+    obj = tk_env.SharedObject(src)
     objs.append(obj)
 
 Depends(objs, tk_env['builddeps'])
 
 tk_lib=tk_env.Library(pkgname, objs)
-
 Depends(tk_lib, tk_env['linkdeps'])
 
 ins_acts = []
@@ -63,7 +58,6 @@ Depends(ins_tk_lib, ins_tk_lib_math_incs)
 specs.SetupLibEnv([gameenv,env], 'tokamak', linkdeps = tk_lib, LIBS = [pkgname],
                   CPPPATH = [os.path.join(tk_dir, src_dir, 'include')],
                   LIBPATH = [tk_env.Dir('.').abspath])
-
 
 tk_env.Alias('deps_install', ins_tk_lib)
 
