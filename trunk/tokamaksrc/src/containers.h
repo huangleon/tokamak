@@ -502,6 +502,11 @@ public:
 	{
 		alloc = &allocDef;
 
+        neByte * mem = alloc->Alloc(sizeof(listItem)+8*sizeof(void*));
+        listItem* tmp = new (mem) listItem[1];
+        mallocNewDiff = (neByte*)tmp - mem;
+        alloc->Free(mem);
+		
 		Init();
 	}
 	NEINLINE void Free()
@@ -588,12 +593,10 @@ public:
 		if (al)
 			alloc = al;
 
-		neByte * mem = alloc->Alloc(sizeof(listItem) * n + 4);
+		neByte * mem = alloc->Alloc(sizeof(listItem) * n + mallocNewDiff);
 
 		data = new (mem) listItem[n];
 
-		mallocNewDiff = (neByte*)data - mem;
-		
 		size = n;
 
 		for (int i = 0; i < n; i++)
