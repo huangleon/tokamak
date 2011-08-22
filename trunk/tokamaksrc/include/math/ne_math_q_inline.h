@@ -382,17 +382,11 @@ NEINLINE neQ operator - ( const neQ& Qa, const neQ& Qb )
 
 NEINLINE neQ&	neQ::Set(f32 __X, f32 __Y, f32 __Z, f32 __W)
 {
-#if defined(ANDORID) || defined(__ANDROID__)
 	X = __X;
 	Y = __Y;
 	Z = __Z;
 	W = __W;
-#else
-        X = _X;
-        Y = _Y;
-        Z = _Z;
-        W = _W;
-#endif
+
 	return (*this);
 }
 
